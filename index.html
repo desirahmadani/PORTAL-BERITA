@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengketa Publik.id - Portal Berita Terpercaya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    #homeBerita { transition: opacity 0.3s ease-in-out; }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: #f1f1f1; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<header class="bg-gray-900 text-white shadow-lg sticky top-0 z-50 border-b border-gray-800">
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-1"> <div class="flex items-center gap-2 cursor-pointer" onclick="filterKategori('Semua')">
+      <img src="assets/logo.png" class="w-auto h-[50px] object-contain" alt="Logo" onerror="this.style.display='none'">
+      <h1 class="text-lg font-bold italic tracking-tighter">
+        <span class="text-white">Sengketa</span><span class="text-red-500">Publik</span><span class="text-white">.id</span>
+      </h1>
+    </div>
+
+    <nav class="hidden lg:flex items-center space-x-3 text-[11px] font-bold uppercase tracking-tight">
+      <button onclick="filterKategori('Semua')" class="hover:text-red-500 transition px-2 py-1">Home</button>
+      <button onclick="filterKategori('Nasional')" class="hover:text-red-500 transition px-2 py-1">Nasional</button>
+      <button onclick="filterKategori('Politik')" class="hover:text-red-500 transition px-2 py-1">Politik</button>
+      <button onclick="filterKategori('Ekonomi')" class="hover:text-red-500 transition px-2 py-1">Ekonomi</button>
+      <button onclick="filterKategori('Teknologi')" class="hover:text-red-500 transition px-2 py-1">Teknologi</button>
+      <button onclick="filterKategori('Provinsi')" class="hover:text-red-500 transition px-2 py-1">Provinsi</button>
+      <button onclick="filterKategori('Olahraga')" class="hover:text-red-500 transition px-2 py-1">Olahraga</button>
+      <button onclick="filterKategori('Internasional')" class="hover:text-red-500 transition px-2 py-1">Internasional</button>
+      <button onclick="openLogin()" class="bg-red-600 px-4 py-1.5 rounded-full hover:bg-red-700 transition ml-2 shadow-md">Login</button>
+    </nav>
+  </div>
+</header>
+
+<section id="heroSection" class="max-w-6xl mx-auto mt-6 px-4">
+  <div class="relative rounded-[32px] overflow-hidden shadow-2xl group">
+    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c" class="w-full h-[300px] object-cover group-hover:scale-105 transition duration-700" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 flex flex-col justify-end p-8">
+      <span class="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-md w-fit mb-3 tracking-widest uppercase">Breaking News</span>
+      <h2 class="text-3xl text-white font-extrabold leading-tight tracking-tighter">Portal Berita Sengketa Publik Resmi Diluncurkan</h2>
+      <p class="text-gray-300 mt-2 max-w-2xl text-base">Menyajikan informasi paling akurat, tajam, dan independen setiap hari.</p>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-6xl mx-auto mt-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10">
+  <div class="md:col-span-2">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <h2 id="kategoriTitle" class="font-black text-2xl text-gray-800 tracking-tighter">Semua Berita</h2>
+      <div class="relative w-full md:w-64">
+        <input id="search" onkeyup="searchBerita()" type="text" placeholder="Cari judul berita..." class="w-full px-4 py-2 bg-white border border-gray-200 rounded-2xl text-sm outline-none focus:ring-2 ring-red-500 shadow-sm transition">
+      </div>
+    </div>
+    <div id="homeBerita" class="grid gap-8"></div>
+  </div>
+
+  <aside class="space-y-8">
+    <div class="bg-white p-6 rounded-[32px] shadow-sm border border-gray-100">
+      <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-gray-800">
+        <span class="w-1.5 h-6 bg-red-600 rounded-full"></span> Kategori
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="filterKategori('Semua')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">SEMUA</button>
+        <button onclick="filterKategori('Nasional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">NASIONAL</button>
+        <button onclick="filterKategori('Politik')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">POLITIK</button>
+        <button onclick="filterKategori('Ekonomi')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">EKONOMI</button>
+        <button onclick="filterKategori('Teknologi')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">TEKNOLOGI</button>
+        <button onclick="filterKategori('Provinsi')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">PROVINSI</button>
+        <button onclick="filterKategori('Olahraga')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">OLAHRAGA</button>
+        <button onclick="filterKategori('Internasional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition uppercase">INTERNASIONAL</button>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 text-white p-8 rounded-[32px] shadow-xl text-center">
+      <div class="w-12 h-12 bg-red-600 mx-auto rounded-xl mb-4 flex items-center justify-center text-lg font-black rotate-3">SP</div>
+      <h4 class="font-bold">Sengketa Publik</h4>
+      <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Jurnalisme Rakyat</p>
+      <div class="mt-4 pt-4 border-t border-gray-800">
+        <p class="text-2xl font-black text-red-500" id="statCount">0</p>
+        <p class="text-[9px] text-gray-500 uppercase font-bold mt-1">Berita Terbit</p>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<div id="modal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[100] p-4 backdrop-blur-md">
+  <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+    <div class="relative w-full border-b flex-shrink-0">
+      <div class="w-full aspect-video max-h-60 overflow-hidden bg-gray-100">
+        <img id="modalImg" class="w-full h-full object-cover" />
+      </div>
+      <button onclick="closeDetail()" class="absolute top-3 right-3 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-red-600 transition flex items-center justify-center font-bold text-xs z-10">✕</button>
+    </div>
+    <div class="p-8 overflow-y-auto flex-grow scrollbar-thin">
+      <span id="modalKategori" class="text-[9px] font-black px-3 py-1 rounded-full bg-red-100 text-red-600 uppercase tracking-widest"></span>
+      <h2 id="modalTitle" class="text-2xl md:text-3xl font-black mt-4 text-gray-900 leading-tight tracking-tighter"></h2>
+      
+      <div class="mt-3 flex flex-wrap gap-2 text-gray-400 text-[11px] font-bold uppercase tracking-wider">
+         <p id="modalMeta"></p>
+         <p id="modalEditor" class="text-red-500"></p>
+      </div>
+
+      <div id="modalContent" class="text-gray-700 leading-relaxed text-base mt-6 whitespace-pre-line"></div>
+      
+      <div id="modalTags" class="mt-6 flex flex-wrap gap-2 pt-4 border-t border-gray-100"></div>
+    </div>
+    <div class="p-4 border-t bg-gray-50 rounded-b-3xl">
+      <button onclick="closeDetail()" class="w-full bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-red-600 transition uppercase text-xs">Selesai Membaca</button>
+    </div>
+  </div>
+</div>
+
+<div id="loginModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100] backdrop-blur-md">
+  <div class="bg-white p-8 rounded-[40px] w-full max-w-xs shadow-2xl">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Admin Login</h2>
+    </div>
+    <input id="loginUser" type="text" placeholder="Username" class="w-full mb-3 px-5 py-3 bg-gray-50 border rounded-2xl outline-none focus:ring-2 ring-red-500 text-sm">
+    <input id="loginPass" type="password" placeholder="Password" class="w-full mb-5 px-5 py-3 bg-gray-50 border rounded-2xl outline-none focus:ring-2 ring-red-500 text-sm">
+    <button onclick="login()" class="w-full bg-red-600 text-white py-3 rounded-2xl font-black shadow-lg hover:bg-red-700 transition">MASUK</button>
+    <button onclick="closeLogin()" class="w-full mt-3 text-gray-400 text-xs font-bold uppercase">Batal</button>
+    <p id="loginError" class="text-red-500 text-[10px] mt-4 hidden text-center font-bold uppercase">Salah Username/Password!</p>
+  </div>
+</div>
+
+<footer class="bg-gray-900 text-white border-t border-gray-800">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 py-4"> <div class="flex items-center gap-2">
+      <img src="assets/logo.png" class="w-auto h-[30px] object-contain opacity-70" alt="Logo">
+      <p class="text-xs font-bold tracking-tighter italic uppercase">
+        Sengketa<span class="text-red-500">Publik</span>.id
+      </p>
+    </div>
+    
+    <div class="text-center md:text-right mt-3 md:mt-0">
+      <p class="text-[9px] text-gray-500 font-bold uppercase tracking-[0.1em]">
+        © 2026 Sengketa Publik.id - CEO
+      </p>
+      <p class="text-[8px] text-gray-600 font-black uppercase tracking-[0.3em] mt-0.5">
+        Fakta Akurat • Independen
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterKategori(namaKategori) {
+  const container = document.getElementById("homeBerita");
+  const title = document.getElementById("kategoriTitle");
+  const hero = document.getElementById("heroSection");
+  const dataBerita = JSON.parse(localStorage.getItem("berita")) || [];
+  document.getElementById('statCount').innerText = dataBerita.length;
+  title.innerText = namaKategori === 'Semua' ? 'Semua Berita' : `Berita ${namaKategori}`;
+  hero.style.display = namaKategori === 'Semua' ? 'block' : 'none';
+  const filteredData = namaKategori === 'Semua' ? dataBerita : dataBerita.filter(b => b.kategori === namaKategori);
+  container.innerHTML = "";
+  if (filteredData.length === 0) {
+    container.innerHTML = `<div class="p-20 text-center text-gray-400 border-2 border-dashed rounded-[40px] font-medium text-sm">Tidak ada berita di kategori ${namaKategori}</div>`;
+    return;
+  }
+  [...filteredData].reverse().forEach(item => {
+    // MENAMBAHKAN DATA PENULIS, EDITOR, TAGS KE DALAM ONCLICK
+    container.innerHTML += `
+      <div onclick="openDetail('${item.judul.replace(/'/g, "\\'")}', '${item.isi.replace(/'/g, "\\'")}', '${item.gambar}', '${item.penulis || 'Admin'}', '${item.tanggal}', '${item.kategori}', '${item.editor || 'Redaksi'}', '${item.tags || ''}')" 
+            class="berita cursor-pointer bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-500 group">
+        <div class="flex flex-col md:flex-row">
+          <div class="md:w-[35%] overflow-hidden bg-gray-200">
+            <img src="${item.gambar}" class="w-full h-full min-h-[180px] object-cover group-hover:scale-110 transition duration-700" />
+          </div>
+          <div class="p-6 md:w-[65%] flex flex-col justify-center">
+            <span class="text-red-600 text-[9px] font-black uppercase tracking-[0.2em] bg-red-50 px-2.5 py-1 rounded-md w-fit">${item.kategori}</span>
+            <h3 class="judul-berita font-black text-xl mt-3 text-gray-900 leading-tight tracking-tighter group-hover:text-red-600 transition">${item.judul}</h3>
+            <p class="text-gray-400 text-[10px] mt-2 font-bold uppercase tracking-widest">${item.tanggal}</p>
+            <p class="isi-berita text-gray-500 mt-3 line-clamp-2 text-sm leading-relaxed font-medium">${item.isi}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function searchBerita() {
+  let input = document.getElementById('search').value.toLowerCase();
+  let items = document.querySelectorAll('.berita');
+  items.forEach(item => {
+    let judul = item.querySelector('.judul-berita').innerText.toLowerCase();
+    let isi = item.querySelector('.isi-berita').innerText.toLowerCase();
+    item.style.display = (judul.includes(input) || isi.includes(input)) ? 'block' : 'none';
+  });
+}
+
+// UPDATE FUNGSI UNTUK MENAMPILKAN EDITOR & TAGS
+function openDetail(judul, isi, img, penulis, tanggal, kategori, editor, tags) {
+  document.getElementById('modalTitle').innerText = judul;
+  document.getElementById('modalContent').innerText = isi;
+  document.getElementById('modalImg').src = img;
+  document.getElementById('modalMeta').innerText = `Oleh ${penulis} • ${tanggal}`;
+  document.getElementById('modalEditor').innerText = `• Editor: ${editor}`;
+  document.getElementById('modalKategori').innerText = kategori;
+
+  // Menampilkan Tags
+  const tagContainer = document.getElementById('modalTags');
+  tagContainer.innerHTML = "";
+  if(tags) {
+     tags.split(',').forEach(t => {
+        tagContainer.innerHTML += `<span class="bg-gray-100 text-gray-500 text-[9px] font-bold px-2 py-1 rounded">#${t.trim()}</span>`;
+     });
+  }
+
+  document.getElementById('modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('modal').classList.add('hidden');
+  document.body.style.overflow = 'auto';
+}
+
+function openLogin() { document.getElementById('loginModal').classList.remove('hidden'); }
+function closeLogin() { document.getElementById('loginModal').classList.add('hidden'); document.getElementById('loginError').classList.add('hidden'); }
+function login() {
+  let user = document.getElementById('loginUser').value;
+  let pass = document.getElementById('loginPass').value;
+  if (user === 'admin' && pass === '12345') { window.location.href = "admin.html"; }
+  else { document.getElementById('loginError').classList.remove('hidden'); }
+}
+
+document.addEventListener("DOMContentLoaded", () => filterKategori('Semua'));
+</script>
+</body>
+</html>

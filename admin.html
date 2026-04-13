@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="app.js"></script>
+
+  <style>
+    .hidden { display: none !important; }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+
+<div class="max-w-6xl mx-auto mt-10">
+
+  <div class="bg-white shadow-lg rounded-2xl p-6 mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">📊 Dashboard Admin</h1>
+    <p class="text-gray-500">Kelola berita Tetesan Fakta</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+    <div class="bg-blue-500 text-white p-5 rounded-2xl shadow-lg">
+      <p class="text-sm opacity-80">Total Berita</p>
+      <h2 id="total" class="text-3xl font-bold">0</h2>
+    </div>
+
+    <div class="bg-green-500 text-white p-5 rounded-2xl shadow-lg">
+      <p class="text-sm opacity-80">Published</p>
+      <h2 id="publish" class="text-3xl font-bold">0</h2>
+    </div>
+
+    <div class="bg-red-500 text-white p-5 rounded-2xl shadow-lg">
+      <p class="text-sm opacity-80">Draft</p>
+      <h2 id="draft" class="text-3xl font-bold">0</h2>
+    </div>
+
+  </div>
+
+  <div class="flex flex-wrap gap-3 mb-6">
+
+    <button onclick="openForm()"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow">
+      ➕ Tambah Berita
+    </button>
+
+    <button onclick="toggleList()"
+      class="bg-gray-800 hover:bg-black text-white px-5 py-2 rounded-xl shadow">
+      📄 Kelola Berita
+    </button>
+
+    <button onclick="logout()"
+      class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl shadow">
+      🚪 Logout
+    </button>
+
+  </div>
+
+  <div id="adminList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+</div>
+
+<div id="form" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 overflow-y-auto">
+
+  <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-2xl my-10">
+
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-bold text-xl">Tambah Berita Baru</h2>
+
+      <button onclick="closeForm()" class="text-gray-500 hover:text-black text-xl">
+        ✖
+      </button>
+    </div>
+
+    <input id="judul" placeholder="Judul berita"
+      class="w-full border p-3 rounded-xl mb-3 outline-none focus:ring-2 ring-blue-500 font-bold">
+
+    <select id="kategori" class="w-full border p-3 rounded-xl mb-3 outline-none focus:ring-2 ring-blue-500 bg-white">
+      <option value="">Pilih Kategori</option>
+      <option value="Nasional">Nasional</option>
+      <option value="Politik">Politik</option>
+      <option value="Ekonomi">Ekonomi</option>
+      <option value="Teknologi">Teknologi</option>
+      <option value="Provinsi">Provinsi</option>
+      <option value="Olahraga">Olahraga</option>
+      <option value="Internasional">Internasional</option>
+    </select>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+        <input id="seoKey" placeholder="Frasa Kunci Utama (SEO)" class="border p-3 rounded-xl text-sm outline-none focus:ring-2 ring-green-500 bg-green-50/30">
+        <input id="tagInput" placeholder="Tag (contoh: viral, dpr, olahraga)" class="border p-3 rounded-xl text-sm outline-none focus:ring-2 ring-purple-500 bg-purple-50/30">
+    </div>
+
+    <div class="border-2 border-dashed border-gray-200 rounded-xl p-3 mb-3 text-center bg-gray-50">
+        <p class="text-[10px] font-bold text-blue-600 uppercase mb-2">Gambar Andalan</p>
+        <input id="gambar" type="file" accept="image/*" class="text-xs w-full">
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-3">
+        <input id="penulis" placeholder="Nama Penulis" class="border p-3 rounded-xl text-sm outline-none focus:ring-2 ring-orange-400 bg-gray-50">
+        <input id="editor" placeholder="Nama Editor" class="border p-3 rounded-xl text-sm outline-none focus:ring-2 ring-orange-400 bg-gray-50">
+    </div>
+
+    <textarea id="isi" placeholder="Isi berita"
+      class="w-full border p-3 rounded-xl mb-3 h-32 outline-none focus:ring-2 ring-blue-500"></textarea>
+
+    <button onclick="tambahBerita()"
+      class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl w-full font-bold shadow-lg transition transform active:scale-95 uppercase tracking-wider">
+      💾 Simpan Berita
+    </button>
+
+  </div>
+</div>
+
+</body>
+</html>
